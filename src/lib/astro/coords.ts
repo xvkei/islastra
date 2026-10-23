@@ -3,6 +3,10 @@ import * as Astronomy from 'astronomy-engine';
 export const RAD = Math.PI / 180;
 export const mod = (a: number, n: number) => ((a % n) + n) % n;
 
+const DIRS = ['north', 'northeast', 'east', 'southeast', 'south', 'southwest', 'west', 'northwest'];
+/** Compass direction name for an azimuth in degrees. */
+export const dirName = (az: number) => DIRS[Math.round(mod(az, 360) / 45) % 8];
+
 /** Unit vector on the sky for right ascension and declination in degrees (equatorial frame). */
 export function eqUnit(raDeg: number, decDeg: number): [number, number, number] {
   const ra = raDeg * RAD;
@@ -17,6 +21,10 @@ export function altAzToENU(altDeg: number, azDeg: number): [number, number, numb
   const az = azDeg * RAD;
   const c = Math.cos(alt);
   return [c * Math.sin(az), c * Math.cos(az), Math.sin(alt)];
+}
+
+export function enuToAltAz(e: number, n: number, u: number) {
+  return { alt: Math.asin(Math.max(-1, Math.min(1, u))) / RAD, az: mod(Math.atan2(e, n) / RAD, 360) };
 }
 
 /** What's needed to turn fixed sky positions into local east/north/up for one place and moment. */
@@ -39,9 +47,9 @@ export function toENU(f: Frame, x: number, y: number, z: number, out: number[]) 
 
 export const BODY_IDS = ['Sun', 'Moon', 'Mercury', 'Venus', 'Mars', 'Jupiter', 'Saturn'] as const;
 export type BodyId = (typeof BODY_IDS)[number];
-export type BodyPos = { id: BodyId; alt: number; az: number; mag: number; phase: number; fraction: number };
+export type BodyPos = { id: BodyId; alt: number; az: number; mag: number; phase: number; fraction: number; dist: number };
 
-/** Where the Sun, Moon and naked-eye planets are, as seen from a place at a moment. */
+/** Where the Sun, Moon and naked-eye planets are, as seen from a place at a moment. `dist` is in AU. */
 export function bodyPositions(date: Date, lat: number, lon: number): BodyPos[] {
   const observer = new Astronomy.Observer(lat, lon, 0);
   return BODY_IDS.map((id) => {
@@ -56,6 +64,7 @@ export function bodyPositions(date: Date, lat: number, lon: number): BodyPos[] {
       mag: ill ? ill.mag : -26.7,
       phase: id === 'Moon' ? Astronomy.MoonPhase(date) : 0,
       fraction: ill ? ill.phase_fraction : 1,
+      dist: eq.dist,
     };
   });
 }
