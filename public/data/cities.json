@@ -1,0 +1,10 @@
+[
+  { "id": "manila", "name": "Manila", "province": "Metro Manila", "lat": 14.5995, "lon": 120.9842, "landscape": "hills", "glow": 1.0, "limitMag": 3.6, "quality": "City glow · bright stars only", "lights": [[180, 360, 80], [0, 60, 40]] },
+  { "id": "dasmarinas", "name": "Dasmariñas", "province": "Cavite", "lat": 14.3294, "lon": 120.9367, "landscape": "hills", "glow": 0.7, "limitMag": 4.3, "quality": "Suburban glow", "lights": [[296, 345, 45], [200, 240, 15]] },
+  { "id": "tagaytay", "name": "Tagaytay", "province": "Cavite", "lat": 14.1153, "lon": 120.9621, "landscape": "coast", "water": [115, 245], "glow": 0.45, "limitMag": 5.0, "quality": "Some glow · view over Taal Lake", "lights": [[290, 350, 25], [140, 220, 14]] },
+  { "id": "baguio", "name": "Baguio", "province": "Benguet", "lat": 16.4023, "lon": 120.596, "landscape": "mountains", "glow": 0.45, "limitMag": 5.0, "quality": "Mountain air · many stars", "lights": [[150, 210, 20]] },
+  { "id": "basco", "name": "Basco", "province": "Batanes", "lat": 20.4487, "lon": 121.9702, "landscape": "hills", "glow": 0.08, "limitMag": 6.3, "quality": "Very dark · Milky Way visible", "lights": [[100, 120, 5]] },
+  { "id": "cebu", "name": "Cebu City", "province": "Cebu", "lat": 10.3157, "lon": 123.8854, "landscape": "coast", "water": [30, 190], "glow": 0.8, "limitMag": 3.9, "quality": "City glow over the sea", "lights": [[200, 330, 70]] },
+  { "id": "puerto-princesa", "name": "Puerto Princesa", "province": "Palawan", "lat": 9.7392, "lon": 118.7353, "landscape": "coast", "water": [60, 300], "glow": 0.25, "limitMag": 5.8, "quality": "Dark · lots of stars", "lights": [[20, 55, 10]] },
+  { "id": "davao", "name": "Davao City", "province": "Davao del Sur", "lat": 7.1907, "lon": 125.4553, "landscape": "coast", "water": [50, 150], "glow": 0.7, "limitMag": 4.3, "quality": "City glow · Mt. Apo to the west", "lights": [[300, 30, 45], [160, 200, 10]] }
+]
