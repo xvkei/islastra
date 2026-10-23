@@ -1,0 +1,63 @@
+/* Islastra design tokens. Colours live here and nowhere else.
+   Switch palettes with data-palette="espresso" | "charcoal" on <html>. */
+
+:root,
+[data-palette='espresso'] {
+  --ground: #0b0908;
+  --ground2: #16110e;
+  --panel: #1d1714;
+  --line: #3a2e26;
+  --text: #f2eae1;
+  --muted: #a39486;
+  --soft: #c7b9ab;
+  --accent: #ff8a5b;
+  --accent-bg: #3a2219;
+  --accent-text: #ffb08f;
+  --planet: #f2c879;
+  --sun: #ffe6a8;
+  --water: #1f1915;
+  --con-line: #7a6556;
+  --con-name: #8e7868;
+  --city-light: #f2b26b;
+  --sky-glow: #6a4430;
+  --sky-zenith: #0a0808;
+  --sky-night-top: #0f0c0c;
+  --sky-night-bottom: #2a201c;
+  --sky-twilight-top: #231b26;
+  --sky-twilight-bottom: #7a5444;
+  --sky-day-top: #4f6f99;
+  --sky-day-bottom: #9db5cf;
+}
+
+[data-palette='charcoal'] {
+  --ground: #0a0a0c;
+  --ground2: #141418;
+  --panel: #19191d;
+  --line: #2e2e36;
+  --text: #ededf1;
+  --muted: #8f8f9b;
+  --soft: #b9b9c4;
+  --accent: #f59cc2;
+  --accent-bg: #3a2036;
+  --accent-text: #f7b3d1;
+  --planet: #f2c879;
+  --sun: #ffe6a8;
+  --water: #18181f;
+  --con-line: #62627a;
+  --con-name: #76768c;
+  --city-light: #f2b26b;
+  --sky-glow: #4e3e48;
+  --sky-zenith: #08080c;
+  --sky-night-top: #0c0c12;
+  --sky-night-bottom: #22222f;
+  --sky-twilight-top: #1f2133;
+  --sky-twilight-bottom: #5e4e66;
+  --sky-day-top: #4f6f99;
+  --sky-day-bottom: #9db5cf;
+}
+
+:root {
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --radius-pill: 999px;
+  --radius-card: 12px;
+}
