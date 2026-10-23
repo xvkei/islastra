@@ -1,75 +1,76 @@
-# React + TypeScript + Vite
+# Islastra
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+*The Philippine night sky, star by star.*
 
-Currently, two official plugins are available:
+Islastra (from *isla*, island, and *astra*, stars) is an immersive view of the
+night sky from anywhere in the Philippines. Stand on the ground, look around and
+up, and see the real stars, constellations, Moon and planets for any time
+tonight, above a landscape that matches where you are.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Live:** [xvkei.github.io/islastra](https://xvkei.github.io/islastra/)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **The real sky** for any moment from 6 PM to 6 AM: about 9,000 naked-eye stars
+  in their true colours, all 88 constellations, the Moon with its real phase, and
+  the planets Mercury to Saturn.
+- **Look around and up:** drag (or use the arrow keys) to turn and tilt all the way
+  to the zenith; scroll or pinch to zoom. The view uses a stereographic projection,
+  so constellations keep their shapes even straight overhead.
+- **Eight places** from Batanes to Davao, each with its own landscape (hills and
+  palms, coast with the Moon's reflection on the water, or pine-covered mountains),
+  city lights, and light pollution level, so Manila shows only the brightest stars
+  while Batanes is full of them.
+- **Tonight card:** sunset, full darkness, the Moon's phase, which planets are up
+  or rising later, and how high Polaris sits (it always equals your latitude).
+- **Tap anything** for details: distance, temperature, brightness, position, rise
+  and set times, and when a star's light set off on its way to you.
+- **Text list view** of everything bright above the horizon, for screen readers or
+  anyone who prefers text.
 
-## Expanding the ESLint configuration
+## How it works
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Star data comes from the HYG database, cleaned in Python (`scripts/build_stars.py`):
+  naked-eye stars only, colour index converted to temperature and display colour.
+- Positions are computed in the browser: each star's fixed sky coordinates are
+  turned into altitude and azimuth for the chosen place and time using the local
+  sidereal time. The Moon, planets and Sun come from
+  [astronomy-engine](https://github.com/cosinekitty/astronomy).
+- Everything is drawn on a single canvas, redrawn only when the view, time, place
+  or settings change.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Running locally
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+To rebuild the star data, download the HYG CSV (astronexus.com/hyg) and the
+d3-celestial `constellations.lines.json` and `constellations.json` into
+`data/raw/`, then:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+pip install pandas
+python scripts/build_stars.py
 ```
+
+## Accessibility
+
+Keyboard controls for looking around (arrow keys), zooming (`+`/`-`) and
+deselecting (Escape); every control is labelled; the list view offers a text
+alternative to the canvas; colour is never the only cue.
+
+## Credits
+
+- Star data: [HYG database](https://astronexus.com/hyg) by David Nash, CC BY-SA 4.0.
+- Constellation lines and names: [d3-celestial](https://github.com/ofrohn/d3-celestial)
+  by Olaf Frohn, BSD 3-Clause.
+- Sun, Moon and planet positions: [astronomy-engine](https://github.com/cosinekitty/astronomy)
+  by Don Cross, MIT.
+
+## Roadmap
+
+Version 2 will add a star explorer (Hertzsprung–Russell diagram), real light
+pollution from NASA satellite data, more landscapes and "use my location", sky
+events, birthday sky prints, and Filipino star lore.
